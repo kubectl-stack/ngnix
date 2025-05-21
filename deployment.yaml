@@ -1,24 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-site
+  name: nginx-deployment
+  labels:
+    app: nginx
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx-site
+      app: nginx
   template:
     metadata:
       labels:
-        app: nginx-site
+        app: nginx
     spec:
       containers:
       - name: nginx
-        image: nginx:alpine
-        volumeMounts:
-        - name: html-volume
-          mountPath: /usr/share/nginx/html
-      volumes:
-      - name: html-volume
-        configMap:
-          name: mysite-html
+        image: nginx:1.25
+        ports:
+        - containerPort: 80
