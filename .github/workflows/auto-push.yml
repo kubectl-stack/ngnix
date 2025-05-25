@@ -28,6 +28,6 @@ jobs:
         run: |
           git add .
           git commit -m "Automated commit $(date)" || echo "No changes to commit"
-          git push origin main
+          git push origin master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # This is automatically created by GitHub for you
