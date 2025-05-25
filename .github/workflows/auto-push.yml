@@ -1,0 +1,33 @@
+name: Auto Commit and Push Changes
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # This runs every day at midnight (UTC)
+  push:
+    branches:
+      - master  # Optionally, trigger this when changes are pushed to the main branch
+  workflow_dispatch:  # Optionally, you can manually trigger this workflow from the GitHub Actions UI
+
+jobs:
+  commit_and_push:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Check out the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Git
+      - name: Set up Git user
+        run: |
+          git config --global user.name "kubectl-stack"
+          git config --global user.email "kubectl96@gmail.com"
+
+      # Add changes, commit, and push
+      - name: Add, commit, and push changes
+        run: |
+          git add .
+          git commit -m "Automated commit $(date)" || echo "No changes to commit"
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # This is automatically created by GitHub for you
