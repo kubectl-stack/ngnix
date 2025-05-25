@@ -2,7 +2,7 @@ name: Auto Commit and Push Changes
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # This runs every day at midnight (UTC)
+    - cron: '* * * * *'  # This runs every day at midnight (UTC)
   push:
     branches:
       - master  # Optionally, trigger this when changes are pushed to the main branch
