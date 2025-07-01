@@ -1,21 +1,40 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: nginx-php-deployment
   labels:
-    app: nginx
+    app: nginx-php
 spec:
-  replicas: 5
+  replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: nginx-php
   template:
     metadata:
       labels:
-        app: nginx
+        app: nginx-php
     spec:
       containers:
       - name: nginx
         image: nginx:1.25
         ports:
         - containerPort: 80
+        volumeMounts:
+        - name: webroot
+          mountPath: /var/www/html
+        - name: nginx-config
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+      - name: php-fpm
+        image: php:8.2-fpm
+        volumeMounts:
+        - name: webroot
+          mountPath: /var/www/html
+      volumes:
+      - name: webroot
+        hostPath:
+          path: /mnt/web
+          type: Directory
+      - name: nginx-config
+        configMap:
+          name: nginx-php-config
