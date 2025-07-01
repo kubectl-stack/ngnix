@@ -13,15 +13,15 @@ spec:
         app: nginx-hostpath
     spec:
       containers:
-      - name: nginx
-        image: nginx:latest
-        ports:
-        - containerPort: 80
-        volumeMounts:
-        - name: web-content
-          mountPath: /usr/share/nginx/html
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: web-content
+              mountPath: /usr/share/nginx/html
       volumes:
-      - name: web-content
-        hostPath:
-          path: /mnt/web
-          type: Directory
+        - name: web-content
+          hostPath:
+            path: /mnt/web
+            type: Directory
