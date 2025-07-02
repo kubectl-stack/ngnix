@@ -30,7 +30,7 @@ spec:
       volumes:
       - name: web-root
         hostPath:
-          path: /mnt/web
+          path: /mnt/web_hosting
           type: Directory
       - name: nginx-conf
         configMap:
