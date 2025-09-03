@@ -1,0 +1,2 @@
+gpedit
+DISM /Online /Add-Capability /CapabilityName:Rsat.GroupPolicy.Management.Tools~~~~0.0.1.0
